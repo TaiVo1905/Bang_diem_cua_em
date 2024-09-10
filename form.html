@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #999;
+            border: 3px solid red;
+            display: flex;
+            text-align: left;
+            justify-content: center;
+            flex-direction: column;
+            width: 500px;
+        }
+
+        .title {
+            color: blue;
+            align-self: center;
+        }
+
+        .class1, .class2, .class3, .class4 {
+            margin: 5px 20px;
+            display: flex;
+            
+        }
+
+        span {
+            display: block;
+            line-height: 30px;
+        }
+
+        #semester1, #semester2, #year {
+            height: 30px;
+            outline: none;
+            margin-left: 5px;
+        }
+
+        #semester1, #semester2 {
+            display: block;
+            flex-grow: 1;
+            padding-left: 5px;
+        }
+
+        #year {
+            width: 10%;
+            color: red;
+        }
+
+        .class3 > select {
+            margin-left: 46px !important;
+        }
+
+        #summarise{
+            display: block;
+            width: 200px;
+            height: 30px;
+            background-color: #fff;
+            flex-grow: 1;
+            line-height: 30px;
+            padding-left: 5px;
+            
+        }
+
+        #type {
+            margin: 2px 20px;
+            font-weight: 500;
+            font-size: 48px;
+        }
+
+        .class5 {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .class5 > button {
+            width: 54px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .ok {
+            margin-right: 46px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">BANG DIEM CUA EM</h1>
+
+        <div class="class1">
+            <span>Semester 1:</span>
+            <input type="number" name="" class="semester" id="semester1">
+        </div>
+
+        <div class="class2">
+            <span>Semester 2:</span>
+            <input type="number" name="" class="semester" id="semester2">
+        </div>
+
+        <div class="class3">
+            <span>Year:</span>
+            <select name="" id="year">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        
+        <div class="class4">
+            <span>Summarise:</span>
+            <div id="summarise"></div>
+        </div>
+
+        <div id="type"></div>
+
+        <div class="class5">
+            <button class="ok" onclick="calculation()">OK</button>
+            <button onclick="cancel()">Cancel</button>
+        </div>
+
+    </div>
+    
+    <script>
+        function calculation () {
+            var s1 = parseFloat(document.getElementById('semester1').value);
+            var s2 = parseFloat(document.getElementById('semester2').value);
+            var y = document.getElementById('year');
+            y = parseInt(y.options[y.selectedIndex].value);
+            var k;
+            var type;
+
+            switch (y) {
+                case 1:
+                    k = (s1 + s2)/2;
+                    break;
+                case 2:
+                    k = (s1 + s2*2)/3;
+                    break;
+                case 3:
+                    k = (s1 + s2*3)/4;
+                    break;
+                default:
+                    k = 0;
+            }
+            document.getElementById('summarise').innerHTML = k;
+            
+            if (k >= 9) {
+                type = "Hoc sinh gioi"
+            } else if (k >=7) {
+                type = "Hoc sinh kha"
+            } else if (k >=5) {
+                type = "Hoc sinh trung binh"
+            } else {
+                type = "Hoc sinh yeu"
+            }
+            document.getElementById('type').innerHTML = type;
+            document.getElementById('type').style.color = "red";
+        }
+
+        function cancel() {
+            document.getElementById('semester1').value = "";
+            document.getElementById('semester2').value = "";
+            document.getElementById('year').value = "1";
+            document.getElementById('summarise').innerHTML = "";
+            document.getElementById('type').innerHTML = "";
+        }
+    </script>
+</body>
+</html>
